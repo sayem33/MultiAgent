@@ -1,0 +1,89 @@
+[
+  {
+    "test_id": "slide_01_summary_short",
+    "task_type": "summarization",
+    "material_id": "slide_01",
+    "instruction": "Write a concise 100-word summary that captures the slide’s main ideas.",
+    "generated_output": "This is a mock response for testing purposes. Requirements Engineering involves five key activities: elicitation, analysis, specification, validation, and management.",
+    "reference_answer": "Requirements Engineering blends human factors and structure across five activities: elicitation, analysis & negotiation, specification, validation, and management. It is ‘more art than science’ because communication and culture shape outcomes, while standards and templates add rigor. Research venues (IEEE RE, REFSQ, REJ, IEEE Software) inform best practices. Early clarity reduces rework.",
+    "error": null,
+    "latency_seconds": 0.10183477401733398,
+    "timestamp": "2025-11-08T09:34:30.349759",
+    "llm_evaluation": {
+      "scores": {
+        "correctness": 8.0,
+        "completeness": 7.5,
+        "clarity": 8.5,
+        "relevance": 8.0,
+        "overall": 8.0
+      },
+      "reasoning": "CORRECTNESS: 8\nCOMPLETENESS: 7.5\nCLARITY: 8.5\nRELEVANCE: 8\nOVERALL: 8\n\nREASONING: Mock evaluation for testing.",
+      "raw_evaluation": "Mock evaluation"
+    },
+    "automated_metrics": {
+      "length_ratio": 0.39215686274509803,
+      "word_precision": 0.5,
+      "word_recall": 0.20833333333333334,
+      "word_f1": 0.29411764705882354,
+      "char_jaccard": 0.675
+    }
+  },
+  {
+    "test_id": "slide_01_summary_detailed",
+    "task_type": "summarization",
+    "material_id": "slide_01",
+    "instruction": "Write a detailed 200-word summary linking concepts and their implications.",
+    "generated_output": "This is a mock response for testing purposes. Requirements Engineering involves five key activities: elicitation, analysis, specification, validation, and management.",
+    "reference_answer": "RE reduces late change by clarifying needs early. Elicitation surfaces needs; analysis & negotiation reconcile conflicts; specification records decisions in testable form; validation checks quality and agreement; management governs change, status, and versions. The art side involves communication and context; the science side uses standards and measurable criteria. Research venues (IEEE RE Conference, REFSQ, Requirements Engineering Journal, IEEE Software) guide evidence-based practice.",
+    "error": null,
+    "latency_seconds": 0.1009972095489502,
+    "timestamp": "2025-11-08T09:34:30.450756",
+    "llm_evaluation": {
+      "scores": {
+        "correctness": 8.0,
+        "completeness": 7.5,
+        "clarity": 8.5,
+        "relevance": 8.0,
+        "overall": 8.0
+      },
+      "reasoning": "CORRECTNESS: 8\nCOMPLETENESS: 7.5\nCLARITY: 8.5\nRELEVANCE: 8\nOVERALL: 8\n\nREASONING: Mock evaluation for testing.",
+      "raw_evaluation": "Mock evaluation"
+    },
+    "automated_metrics": {
+      "length_ratio": 0.3225806451612903,
+      "word_precision": 0.2,
+      "word_recall": 0.07142857142857142,
+      "word_f1": 0.10526315789473682,
+      "char_jaccard": 0.6428571428571429
+    }
+  },
+  {
+    "test_id": "slide_01_quiz_easy_1",
+    "task_type": "quiz_generation",
+    "material_id": "slide_01",
+    "instruction": "Generate 3 EASY multiple-choice questions (4 options A–D) on the specified topics. Provide an Answer Key and 1-sentence explanation per item.",
+    "generated_output": "This is a mock response for testing purposes. Requirements Engineering involves five key activities: elicitation, analysis, specification, validation, and management.",
+    "reference_answer": "{\"sample\": [{\"question\": \"Which RE activity discovers stakeholder needs?\", \"options\": [\"Validation\", \"Elicitation\", \"Management\", \"Deployment\"], \"correct_answer\": \"B\", \"explanation\": \"Elicitation surfaces needs and assumptions.\"}, {\"question\": \"A primary benefit of RE is:\", \"options\": [\"Eliminate testing\", \"Reduce rework via early clarity\", \"Free hosting\", \"Faster compilers\"], \"correct_answer\": \"B\", \"explanation\": \"Early clarity avoids costly late changes.\"}, {\"question\": \"Which activity controls change and status?\", \"options\": [\"Specification\", \"Validation\", \"Management\", \"Operations\"], \"correct_answer\": \"C\", \"explanation\": \"Management tracks versions, status, and changes.\"}]}",
+    "error": null,
+    "latency_seconds": 0.10102295875549316,
+    "timestamp": "2025-11-08T09:34:30.551779",
+    "llm_evaluation": {
+      "scores": {
+        "correctness": 8.0,
+        "completeness": 7.5,
+        "clarity": 8.5,
+        "relevance": 8.0,
+        "overall": 8.0
+      },
+      "reasoning": "CORRECTNESS: 8\nCOMPLETENESS: 7.5\nCLARITY: 8.5\nRELEVANCE: 8\nOVERALL: 8\n\nREASONING: Mock evaluation for testing.",
+      "raw_evaluation": "Mock evaluation"
+    },
+    "automated_metrics": {
+      "length_ratio": 0.2857142857142857,
+      "word_precision": 0.05,
+      "word_recall": 0.017857142857142856,
+      "word_f1": 0.026315789473684206,
+      "char_jaccard": 0.5625
+    }
+  }
+]

@@ -1,0 +1,820 @@
+{
+  "training_examples": [
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: the Maria–Phil HR system scenario and its lessons.",
+      "reference_answer": "Maria from HR asks developer Phil to support an employee’s legal name change not tied to marital status. Phil never implemented this because it was never specified, revealing a gap in elicitation and documentation. Wiegers uses this story to show that many failures stem from misunderstood or unstated requirements, not code defects. The case highlights the cost of assumptions, the need for early stakeholder collaboration, and the value of writing requirements down. Clear scope, validation, and change control prevent last‑minute surprises, rework, and user frustration."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: why the Maria–Phil story illustrates requirements risks and remedies.",
+      "reference_answer": "The Maria–Phil exchange illustrates a classic requirements breakdown: users assume capabilities are obvious while developers implement only what is explicitly requested. The HR system allowed name changes only when marital status changed, blocking a legal name change for other reasons. This was not a ‘bug’ but an omission born of informal communication, implied functionality, and missing documentation. Wiegers generalizes from this vignette: requirements errors—ambiguities, assumptions, and unmanaged changes—account for a large share of software defects and late churn. The remedy is disciplined practices: structured elicitation, traceable documentation, stakeholder alignment, and validation before construction. By distinguishing needs from design, agreeing on scope, and managing changes, teams reduce rework and deliver solutions that address real business problems. The story underscores that requirements quality is foundational to product quality and delivery predictability."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 1: the Maria–Phil HR system scenario and why clear requirements matter. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "What primarily caused the Maria–Phil problem?",
+            "options": [
+              "A) Database crash",
+              "B) Unclear, unstated requirements",
+              "C) Network outage",
+              "D) UI defect"
+            ],
+            "correct_answer": "B",
+            "explanation": "The capability was never explicitly specified or validated."
+          },
+          {
+            "question": "What did Phil implement regarding name changes?",
+            "options": [
+              "A) Any name change",
+              "B) No name changes",
+              "C) Only with marital status change",
+              "D) Manager approval only"
+            ],
+            "correct_answer": "C",
+            "explanation": "His logic allowed name changes only when marital status changed."
+          },
+          {
+            "question": "What practice would have MOST prevented this issue?",
+            "options": [
+              "A) More unit tests",
+              "B) Early, documented elicitation and validation",
+              "C) Larger team",
+              "D) New framework"
+            ],
+            "correct_answer": "B",
+            "explanation": "Clear, validated requirements avoid such omissions."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 1: the Maria–Phil HR system scenario and why clear requirements matter. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which statement best captures Wiegers’ lesson from the scenario?",
+            "options": [
+              "A) Most issues are coding bugs",
+              "B) Stakeholder training replaces documentation",
+              "C) Requirements discipline prevents costly late changes",
+              "D) UX design solves scope gaps"
+            ],
+            "correct_answer": "C",
+            "explanation": "He emphasizes disciplined requirements work to reduce rework."
+          },
+          {
+            "question": "If the team adds the capability later without scope control, which risk grows most?",
+            "options": [
+              "A) Technical debt from unplanned changes",
+              "B) Reduced code coverage",
+              "C) Fewer stakeholders",
+              "D) Over‑documentation"
+            ],
+            "correct_answer": "A",
+            "explanation": "Late scope changes increase debt and integration risk."
+          },
+          {
+            "question": "Which artifact would BEST ensure the capability is not missed again?",
+            "options": [
+              "A) Vision deck only",
+              "B) Informal emails",
+              "C) Traceable SRS/user story with acceptance criteria",
+              "D) Post‑release blog post"
+            ],
+            "correct_answer": "C",
+            "explanation": "Traceable requirements and acceptance criteria make the need explicit."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain why the Maria–Phil story demonstrates the need for explicit, validated requirements in 5–7 sentences.",
+      "reference_answer": "The story shows that assumptions are not requirements. Maria expected arbitrary name changes, but Phil coded a narrower rule. Without explicit statements, developers implement the safest interpretation, not the user’s intent. Validation sessions expose hidden constraints and exceptions before coding. Documented, reviewable requirements align expectations and provide a basis for test design. Clear scope and change control reduce late rework and stakeholder frustration. Thus, explicit, validated requirements convert tacit expectations into verifiable commitments."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe concrete steps a team could take to avoid a repeat of the Maria–Phil issue (≤5 sentences).",
+      "reference_answer": "Run scenario‑based elicitation covering standard and exception cases. Capture requirements with acceptance criteria (e.g., name change allowed regardless of marital status). Hold stakeholder reviews for sign‑off and trace to tests. Establish change control to evaluate late requests. Keep a glossary to clarify terms like “name change” and “marital status change.”"
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: the 'Taking your requirements pulse' diagnostic checklist.",
+      "reference_answer": "Wiegers offers a diagnostic checklist to gauge an organization’s requirements health. Warning signs include unclear business objectives, limited user access, ‘everything is critical’ prioritization, ambiguities forcing developers to guess, UI‑centric conversations over user goals, unapproved or constantly changing requirements, scope increases without resources, lost change requests, unused delivered features, and specs satisfied without meeting business objectives. If multiple signs apply, the organization should strengthen its requirements practices. The checklist encourages honest assessment and motivates investment in elicitation, prioritization, change control, and stakeholder alignment."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: how the 'pulse' checklist reveals and addresses RE dysfunctions.",
+      "reference_answer": "The ‘Taking your requirements pulse’ checklist helps teams self‑assess common dysfunctions in their requirements approach. Red flags include absence of clear vision and scope, poor customer availability, and limited access to representative users. Teams struggle when everything is labeled critical and developers face ambiguities that force guessing. Dialogues that fixate on UI elements instead of user goals distort priorities. Lack of formal approval and continual changes destabilize delivery, while scope growth without resource adjustment guarantees slippage. Change requests may be lost without status tracking, and implemented features can go unused if they are misaligned with needs. Projects may fulfill a specification yet fail to achieve business objectives. The checklist’s purpose is to spotlight systemic issues and drive adoption of practices such as measurable objectives, prioritization schemes, change management workflows, and ongoing stakeholder validation."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 1: 'Taking your requirements pulse' checklist for diagnosing RE health. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "What is the purpose of the 'pulse' checklist?",
+            "options": [
+              "A) Choose a programming language",
+              "B) Diagnose requirements practice problems",
+              "C) Estimate server costs",
+              "D) Design the database"
+            ],
+            "correct_answer": "B",
+            "explanation": "It assesses the health of requirements practices."
+          },
+          {
+            "question": "Which is a red flag from the checklist?",
+            "options": [
+              "A) Clear scope",
+              "B) Regular approvals",
+              "C) ‘Everything is critical’ prioritization",
+              "D) Stable baseline"
+            ],
+            "correct_answer": "C",
+            "explanation": "Labeling everything critical prevents rational trade‑offs."
+          },
+          {
+            "question": "What happens when scope grows without resources?",
+            "options": [
+              "A) Faster delivery",
+              "B) Schedule slippage",
+              "C) Better quality",
+              "D) Fewer risks"
+            ],
+            "correct_answer": "B",
+            "explanation": "Unfunded scope increases delay schedules."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 1: 'Taking your requirements pulse' checklist for diagnosing RE health. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which action MOST directly addresses lost change requests?",
+            "options": [
+              "A) Hold longer meetings",
+              "B) Implement a change control board and tracking",
+              "C) Increase test automation only",
+              "D) Add more UI mockups"
+            ],
+            "correct_answer": "B",
+            "explanation": "Governance and tooling prevent changes from being lost."
+          },
+          {
+            "question": "A team focuses on UI colors instead of user goals. Which risk rises?",
+            "options": [
+              "A) Improved traceability",
+              "B) Misalignment with outcomes",
+              "C) Stronger nonfunctional coverage",
+              "D) Better feasibility"
+            ],
+            "correct_answer": "B",
+            "explanation": "UI‑centric talk can neglect actual user tasks and value."
+          },
+          {
+            "question": "Which metric best signals prioritization maturity?",
+            "options": [
+              "A) Build duration",
+              "B) % of requirements with agreed priority and rationale",
+              "C) Number of UI screens",
+              "D) Code churn"
+            ],
+            "correct_answer": "B",
+            "explanation": "Tracking priorities and rationale indicates discipline."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain the value of the 'requirements pulse' checklist in 5–7 sentences.",
+      "reference_answer": "The checklist consolidates recurring RE failure patterns into a quick diagnostic. It helps teams recognize systemic issues such as unclear scope, missing approvals, and unmanaged changes. By surfacing symptoms, it creates urgency to adopt better elicitation, prioritization, and governance. It reframes problems from individual mistakes to process gaps. The tool guides targeted improvements rather than generic fixes. Periodic reassessment reveals whether interventions are working and where to adjust."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe how to use the checklist to improve a struggling project (≤5 sentences).",
+      "reference_answer": "Run a team workshop to score each item honestly. Map top risks to corrective actions: define scope, set priorities, and install change tracking. Assign owners and timelines, then baseline and re‑measure monthly. Tie improvements to delivery KPIs like lead time and defect escape. Institutionalize successful practices as standard operating procedures."
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: terminology problems when defining requirements.",
+      "reference_answer": "Wiegers notes that teams often argue over labels: user, business, functional, system, product, project requirement; user story, feature, constraint. Different backgrounds lead to mismatched interpretations: a customer’s ‘requirement’ might be a high‑level concept to a developer, while a developer’s ‘requirement’ might sound like UI design to a user. This terminological drift breeds confusion. Establishing shared definitions and deliverable names reduces friction and aligns expectations, enabling clearer specification, validation, and traceability across stakeholders."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: aligning requirement types and artifacts to avoid confusion.",
+      "reference_answer": "Terminology mismatch is a root cause of misunderstanding in requirements work. Stakeholders may use the same word for different artifacts, obscuring intent. A ‘business requirement’ establishes value and objectives; ‘user requirements’ express user goals; ‘functional requirements’ specify system behaviors; constraints limit design choices. Without a shared glossary and artifact taxonomy, teams debate wording instead of meaning, causing ambiguity and rework. Wiegers advocates a common vocabulary and clarity on deliverable types to harmonize communication. This enables consistent decomposition from vision to features and testable behaviors, improving review quality and traceability. By aligning terms, teams compare apples to apples, accelerate agreement, and lower the risk of building the wrong thing."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 1: terminology alignment—types of requirements and naming confusion. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "What problem arises from mixed requirement labels?",
+            "options": [
+              "A) Faster coding",
+              "B) Confusion and misinterpretation",
+              "C) Better UX",
+              "D) Easier budgeting"
+            ],
+            "correct_answer": "B",
+            "explanation": "Different meanings for the same label create confusion."
+          },
+          {
+            "question": "Which item states system behaviors?",
+            "options": [
+              "A) Business requirement",
+              "B) Functional requirement",
+              "C) Vision statement",
+              "D) Project charter"
+            ],
+            "correct_answer": "B",
+            "explanation": "Functional requirements describe what the system does."
+          },
+          {
+            "question": "What mitigates terminology confusion MOST?",
+            "options": [
+              "A) More prototypes",
+              "B) Shared glossary and taxonomy",
+              "C) Add developers",
+              "D) Reduce reviews"
+            ],
+            "correct_answer": "B",
+            "explanation": "Common vocabulary aligns stakeholder understanding."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 1: terminology alignment—types of requirements and naming confusion. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "A user’s ‘requirement’ sounds like UI design to developers. What’s the best next step?",
+            "options": [
+              "A) Implement as described",
+              "B) Clarify underlying user goal before design",
+              "C) Reject it",
+              "D) Change the tech stack"
+            ],
+            "correct_answer": "B",
+            "explanation": "Elicit the goal, then derive design later."
+          },
+          {
+            "question": "Which pairing is MOST accurate?",
+            "options": [
+              "A) Constraint ↔ user goal",
+              "B) Business requirement ↔ measurable objective",
+              "C) Functional requirement ↔ team roster",
+              "D) User story ↔ risk register"
+            ],
+            "correct_answer": "B",
+            "explanation": "Business requirements define measurable objectives and value."
+          },
+          {
+            "question": "What artifact helps trace semantics across levels?",
+            "options": [
+              "A) Glossary and mapping from goals to behaviors",
+              "B) Sprint velocity chart",
+              "C) Gantt only",
+              "D) Style guide"
+            ],
+            "correct_answer": "A",
+            "explanation": "Glossary and mappings preserve meaning and traceability."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain why shared terminology is essential in requirements engineering (5–7 sentences).",
+      "reference_answer": "Shared terminology prevents stakeholders from talking past each other. It anchors conversations in agreed definitions for business, user, functional requirements, and constraints. A glossary reduces ambiguity and accelerates reviews. Consistent labels support traceability from objectives to testable behaviors. They also help separate problem statements from design solutions. This clarity reduces rework and aligns implementation with intended value."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe how to implement terminology alignment on a new project (≤5 sentences).",
+      "reference_answer": "Kick off with a domain glossary and artifact taxonomy. Review examples that illustrate each requirement type. Reference the glossary in all templates and reviews. Update definitions as the domain evolves. Automate checks in your RM tool to enforce labels and links."
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: business requirements—vision, scope, and measurable objectives.",
+      "reference_answer": "Business requirements define why the project exists: opportunities, objectives, success metrics, vision, and scope. They guide decisions about which features belong, as shown by Karen’s rejection of a ‘Like this product’ idea that didn’t reduce call time. Vision aligns long‑term direction; scope draws the near‑term boundary of what’s in and out. Measurable objectives and success metrics enable evaluating value and managing trade‑offs. Without this foundation, teams drift, incur scope creep, and miss outcomes."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: using business requirements to guide scope and prioritization.",
+      "reference_answer": "Wiegers positions business requirements at the top of the chain, asserting they must be resolved before functional and nonfunctional details. They encompass business opportunity, measurable objectives, success metrics, and a clear product vision and project scope. Vision provides enduring direction; scope restricts the current increment, controlling in‑out boundaries. Karen’s case shows disciplined scope decisions: features must advance objectives (e.g., reduce call time) to warrant inclusion. Displaying objectives, vision, and scope in elicitation helps stakeholders assess whether proposals fit. This framing improves prioritization, change evaluation, and alignment, reducing churn. By quantifying success, organizations can judge progress and value delivery, avoiding feature creep that doesn’t serve business outcomes."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 5: establishing business requirements—vision, scope, objectives, success metrics. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "What does scope primarily define?",
+            "options": [
+              "A) Long‑term strategy",
+              "B) Current project boundaries",
+              "C) Coding standards",
+              "D) Team size"
+            ],
+            "correct_answer": "B",
+            "explanation": "Scope draws the line for the current iteration or project."
+          },
+          {
+            "question": "Why did Karen reject the feature request?",
+            "options": [
+              "A) No developer time",
+              "B) It failed to support business objectives",
+              "C) Legal issues",
+              "D) Poor UX"
+            ],
+            "correct_answer": "B",
+            "explanation": "It did not reduce call time, the objective at hand."
+          },
+          {
+            "question": "Which element aligns stakeholders to a common direction?",
+            "options": [
+              "A) Risk log",
+              "B) Vision statement",
+              "C) Test plan",
+              "D) Architecture diagram"
+            ],
+            "correct_answer": "B",
+            "explanation": "Vision articulates the product’s long‑term intent."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 5: establishing business requirements—vision, scope, objectives, success metrics. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which artifact best operationalizes success metrics?",
+            "options": [
+              "A) Release notes",
+              "B) OKR‑linked objectives with baselines/targets",
+              "C) Style guide",
+              "D) Code formatter"
+            ],
+            "correct_answer": "B",
+            "explanation": "Linking objectives to measurable targets enables tracking."
+          },
+          {
+            "question": "Vision vs. scope: which is more dynamic?",
+            "options": [
+              "A) Vision",
+              "B) Scope",
+              "C) Both equal",
+              "D) Neither"
+            ],
+            "correct_answer": "B",
+            "explanation": "Scope changes per iteration constraints; vision changes slowly."
+          },
+          {
+            "question": "Which governance most helps evaluate new features?",
+            "options": [
+              "A) Ad‑hoc approvals",
+              "B) Change control with objective alignment checks",
+              "C) Dev‑only decisions",
+              "D) First‑come first‑served"
+            ],
+            "correct_answer": "B",
+            "explanation": "A structured process screens changes against objectives."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain the relationship between vision, scope, and success metrics (5–7 sentences).",
+      "reference_answer": "Vision defines the long‑term product direction and value. Scope limits what the current project or increment will deliver. Success metrics quantify objectives to assess progress toward the vision. Together they guide prioritization and trade‑offs, preventing scope creep. They enable transparent decisions on change requests. This alignment keeps delivery focused on measurable business outcomes."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe how a BA applies business requirements during elicitation (≤5 sentences).",
+      "reference_answer": "Display objectives, vision, and scope at every session. Test each proposal against measurable goals. Document out‑of‑scope items with rationale and possible future consideration. Prioritize features by impact on objectives. Trace requirements to business metrics for later validation."
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: elicitation as iterative discovery with multiple techniques.",
+      "reference_answer": "Elicitation is a collaborative, analytical process to discover stakeholder needs and constraints—not mere transcription. Analysts use interviews, workshops, observation, and document study to uncover goals, logic, and exceptions, speaking in domain language and avoiding premature design. The process is cyclic: elicit, analyze, specify, detect gaps, and repeat. Glossaries clarify terms; prioritization tempers blue‑sky ideas. The outcome is a shared understanding that enables exploring solution alternatives."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: combining techniques and iteration to improve elicitation outcomes.",
+      "reference_answer": "Wiegers frames elicitation as the heart of requirements development: a communication‑intensive, error‑prone activity requiring multiple techniques. Analysts probe beyond requests to understand workflows, decision logic, and constraints, challenging obsolete rules. They combine facilitated techniques (interviews, workshops) with independent techniques (document analysis, observation) to triangulate needs. Using business vocabulary fosters clarity; a glossary captures key terms. Elicitation is iterative; teams cycle through learning, modeling, and specification, revealing gaps and conflicts before design. Participants prioritize ideas early to avoid unbounded scope. By focusing on user tasks and real needs, teams resist jumping into UI solutions too soon, reducing rework and improving alignment with business goals."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 7: requirements elicitation—iterative discovery, techniques, and stakeholder collaboration. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Elicitation is primarily about:",
+            "options": [
+              "A) Coding faster",
+              "B) Discovering and clarifying needs",
+              "C) Finalizing UI",
+              "D) Writing tests only"
+            ],
+            "correct_answer": "B",
+            "explanation": "It discovers stakeholder needs and constraints."
+          },
+          {
+            "question": "Which is a facilitated elicitation technique?",
+            "options": [
+              "A) Static analysis",
+              "B) Interviews",
+              "C) Code review",
+              "D) Deployment"
+            ],
+            "correct_answer": "B",
+            "explanation": "Interviews involve direct stakeholder interaction."
+          },
+          {
+            "question": "Why maintain a glossary?",
+            "options": [
+              "A) Marketing",
+              "B) Reduce term ambiguity",
+              "C) Aesthetic reasons",
+              "D) Versioning"
+            ],
+            "correct_answer": "B",
+            "explanation": "Glossaries align definitions across stakeholders."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 7: requirements elicitation—iterative discovery, techniques, and stakeholder collaboration. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which action best prevents premature design?",
+            "options": [
+              "A) Freeze UI early",
+              "B) Frame discussions around user tasks and goals",
+              "C) Spike code immediately",
+              "D) Skip modeling"
+            ],
+            "correct_answer": "B",
+            "explanation": "Keeping focus on tasks curbs early UI fixation."
+          },
+          {
+            "question": "Why combine multiple elicitation techniques?",
+            "options": [
+              "A) Redundancy only",
+              "B) Different techniques reveal different information",
+              "C) To lengthen projects",
+              "D) To avoid users"
+            ],
+            "correct_answer": "B",
+            "explanation": "Triangulation surfaces diverse, otherwise hidden needs."
+          },
+          {
+            "question": "Iterative elicitation most improves:",
+            "options": [
+              "A) A single big‑bang session",
+              "B) Early detection of gaps and conflicts",
+              "C) Hiring speed",
+              "D) Build times"
+            ],
+            "correct_answer": "B",
+            "explanation": "Cycles expose issues before design and coding."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain why elicitation is iterative and multi‑technique (5–7 sentences).",
+      "reference_answer": "No single activity uncovers all requirements. Stakeholders remember needs over time and in different contexts. Combining interviews, observation, and analysis triangulates truths and exposes gaps. Iterations allow clarification and prioritization as understanding deepens. This reduces ambiguity and design rework. Using domain language and a glossary sustains shared meaning across cycles."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe a practical elicitation plan for a new system (≤5 sentences).",
+      "reference_answer": "Start with stakeholder mapping and interview guides. Run discovery workshops, then observe real workflows. Capture a glossary and initial models; validate with users. Prioritize needs and document acceptance criteria. Schedule follow‑ups to resolve TBDs and conflicts."
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: the SRS and effective requirements documentation.",
+      "reference_answer": "Clear documentation converts scattered ideas into an agreed description of the product. Wiegers warns that brainstorming outputs aren’t an SRS; they must be organized, analyzed, and reviewed. An SRS (or equivalent repository) states functions, qualities, and constraints, supporting planning, design, testing, and user documentation. Documents have limits; RM tools, wikis, or databases can aid change, history, and traceability. Progressive refinement and ongoing discussion remain essential; writing does not replace collaboration."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: organizing and managing requirements in an SRS/repository.",
+      "reference_answer": "The chapter contrasts a 100‑page “voice of the customer” dump with a true SRS. Raw ideas require categorization, structure, and analysis to become a usable specification. Regardless of medium—document, spreadsheet, wiki, or RM tool—the repository should capture functions, nonfunctionals, and constraints, support change management, versioning, subsetting by release, and bidirectional traceability. The SRS underpins planning and testing but should avoid embedding design except for constraints. Progressive elaboration prevents over‑specifying prematurely, while active communication continues throughout development. Structured natural language supported by models is practical for most teams; formal specs suit high‑risk domains. The outcome is a reviewable, shared agreement that reduces ambiguity and rework."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 10: documenting requirements—SRS purpose, repositories, and communication. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "What is an SRS intended to capture?",
+            "options": [
+              "A) Only UI mockups",
+              "B) Functions, qualities, constraints",
+              "C) Source code",
+              "D) Marketing plan"
+            ],
+            "correct_answer": "B",
+            "explanation": "An SRS states behaviors, qualities, and constraints."
+          },
+          {
+            "question": "Why aren’t brainstorm lists sufficient?",
+            "options": [
+              "A) Too long",
+              "B) Not organized or analyzed into a solution description",
+              "C) They’re informal",
+              "D) They have typos"
+            ],
+            "correct_answer": "B",
+            "explanation": "They must be structured and vetted to be actionable."
+          },
+          {
+            "question": "Which helps trace requirements best?",
+            "options": [
+              "A) RM tool with links",
+              "B) Email threads",
+              "C) Slides only",
+              "D) Whiteboard photos"
+            ],
+            "correct_answer": "A",
+            "explanation": "Tooling supports change history and traceability."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 10: documenting requirements—SRS purpose, repositories, and communication. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which principle guides how much detail to write, when?",
+            "options": [
+              "A) Big‑design‑up‑front always",
+              "B) Progressive refinement",
+              "C) No documentation",
+              "D) Freeze everything early"
+            ],
+            "correct_answer": "B",
+            "explanation": "Detail requirements just‑in‑time for implementation."
+          },
+          {
+            "question": "What should the SRS avoid including?",
+            "options": [
+              "A) Acceptance criteria",
+              "B) Design details unrelated to constraints",
+              "C) Nonfunctional requirements",
+              "D) Interfaces and behaviors"
+            ],
+            "correct_answer": "B",
+            "explanation": "It should specify needs, not prescribe design unnecessarily."
+          },
+          {
+            "question": "Which benefit is MOST tied to traceability?",
+            "options": [
+              "A) Nicer formatting",
+              "B) Impact analysis on change",
+              "C) Faster builds",
+              "D) Better fonts"
+            ],
+            "correct_answer": "B",
+            "explanation": "Trace links allow evaluating change consequences."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain the role of an SRS and why raw idea dumps are insufficient (5–7 sentences).",
+      "reference_answer": "An SRS is a structured agreement that defines what the system must do and the constraints it must respect. It transforms scattered ideas into organized, testable requirements. Without analysis and structure, brainstorm output can’t guide design or testing. Repositories and RM tools add change control and traceability. Progressive refinement avoids premature detail while keeping stakeholders aligned. The SRS improves planning, verification, and long‑term maintainability."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe how to convert a brainstorming document into a usable SRS (≤5 sentences).",
+      "reference_answer": "Classify items into business, user, functional, nonfunctional, and constraints. Merge duplicates, resolve conflicts, and clarify ambiguities. Write testable statements and acceptance criteria. Load into an RM tool with IDs and trace links. Review with stakeholders and baseline by release."
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: qualities of excellent requirements.",
+      "reference_answer": "Wiegers lists characteristics of excellent requirements: complete, correct, feasible, necessary, prioritized, unambiguous, and verifiable. Reviews by diverse stakeholders expose ambiguity and conflicts; TBDs mark gaps to resolve. Correctness ties to authoritative sources; necessity links to business objectives. Feasibility balances capability with constraints. Prioritization enables trade‑offs under pressure. Verifiability ensures objective testing instead of opinion. These qualities improve clarity, reduce defects, and speed delivery."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: ensuring requirement quality through reviews and verifiability.",
+      "reference_answer": "High‑quality requirements are multi‑attribute. Completeness provides sufficient detail for implementation; correctness aligns with authoritative sources and higher‑level goals; feasibility fits technical and project constraints; necessity ensures each requirement delivers value or compliance; prioritization guides release planning; unambiguity and comprehensibility reduce divergent interpretations; verifiability enables objective testing. Peer reviews (inspections) detect ambiguities and gaps early; testers add verifiability perspective. TBDs and issue logs make gaps visible until resolved. At the collection level, requirements should be consistent, non‑conflicting, and sufficient to meet business objectives. Emphasizing these qualities shifts defects from late testing to early clarification, lowering cost and improving stakeholder satisfaction."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 11: writing excellent requirements—qualities of good requirement statements. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which quality ensures a tester can check a requirement objectively?",
+            "options": [
+              "A) Feasible",
+              "B) Verifiable",
+              "C) Necessary",
+              "D) Prioritized"
+            ],
+            "correct_answer": "B",
+            "explanation": "Verifiability allows objective confirmation."
+          },
+          {
+            "question": "What marks known gaps for follow‑up?",
+            "options": [
+              "A) TBD flags",
+              "B) UI mocks",
+              "C) Gantt bars",
+              "D) Story points"
+            ],
+            "correct_answer": "A",
+            "explanation": "TBD signals missing details to resolve."
+          },
+          {
+            "question": "Which links a requirement to business value?",
+            "options": [
+              "A) Correctness",
+              "B) Necessity",
+              "C) Feasibility",
+              "D) Ambiguity"
+            ],
+            "correct_answer": "B",
+            "explanation": "Necessity ensures the requirement is worth implementing."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 11: writing excellent requirements—qualities of good requirement statements. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which practice BEST reduces ambiguity?",
+            "options": [
+              "A) Single‑author writing",
+              "B) Formal peer reviews with multiple perspectives",
+              "C) More code comments",
+              "D) Shorter sentences only"
+            ],
+            "correct_answer": "B",
+            "explanation": "Diverse reviews surface multiple interpretations."
+          },
+          {
+            "question": "A requirement is correct but infeasible. What should the team do first?",
+            "options": [
+              "A) Implement anyway",
+              "B) Negotiate alternatives or relax constraints",
+              "C) Delete tests",
+              "D) Change programming language"
+            ],
+            "correct_answer": "B",
+            "explanation": "Feasibility needs adjustment or redesign."
+          },
+          {
+            "question": "Why is prioritization critical under schedule pressure?",
+            "options": [
+              "A) It increases scope",
+              "B) It enables rational trade‑offs",
+              "C) It replaces testing",
+              "D) It reduces stakeholder input"
+            ],
+            "correct_answer": "B",
+            "explanation": "Priorities guide what to keep, defer, or drop."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain the seven qualities of excellent requirements and why each matters (5–7 sentences).",
+      "reference_answer": "Completeness prevents guesswork during implementation. Correctness ties requirements to authoritative sources. Feasibility ensures plans match capabilities and constraints. Necessity filters out low‑value items. Prioritization guides trade‑offs under resource limits. Unambiguity reduces conflicting interpretations. Verifiability enables objective acceptance via tests."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe how to embed these qualities into a team’s workflow (≤5 sentences).",
+      "reference_answer": "Adopt a definition‑of‑ready including the seven qualities. Use checklists and peer reviews with tester participation. Trace each requirement to a business objective and acceptance test. Flag TBDs with due dates and owners. Prioritize with a consistent method (e.g., MoSCoW, WSJF)."
+    },
+    {
+      "task_type": "summarization_short",
+      "instruction": "Write a concise 100-word summary of: validating requirements with reviews, tests, and the V‑model.",
+      "reference_answer": "Validation detects requirement errors early via reviews, test design, and stakeholder evaluation. The V‑model starts test planning in parallel with requirements and design: acceptance tests from user requirements, system tests from functional requirements, integration tests from architecture. Finding defects during requirements takes minutes to fix versus hours late in testing. Validation ensures correctness, completeness, feasibility, necessity, consistency, and sufficiency, shortening schedules and lowering costs."
+    },
+    {
+      "task_type": "summarization_detailed",
+      "instruction": "Write a detailed 200-word summary of: validation vs. verification and why early validation accelerates delivery.",
+      "reference_answer": "Wiegers distinguishes validation (building the right thing) from verification (building it right). Validating requirements entails formal/informal reviews, deriving tests from requirements, and defining acceptance criteria early. Conceptual tests expose ambiguity and omissions before coding. Evidence shows requirements‑phase fixes are far cheaper than late fixes, making early validation a schedule accelerant, not a delay. The V‑model ties each test level to a corresponding specification layer, ensuring traceability and completeness. Validation activities should be threaded through elicitation, analysis, and specification, with inspections as a final gate before baselining. Outcomes include improved quality, reduced rework, and a stronger basis for design and construction."
+    },
+    {
+      "task_type": "quiz_generation_easy",
+      "instruction": "Generate 3 EASY multiple-choice questions (4 options A-D) about Chapter 17: validating the requirements—reviews, early test design, and V-model alignment. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Validation vs. verification: validation asks if we are:",
+            "options": [
+              "A) Doing it fast",
+              "B) Building the right thing",
+              "C) Using the right language",
+              "D) Hiring enough people"
+            ],
+            "correct_answer": "B",
+            "explanation": "Validation ensures requirements meet needs."
+          },
+          {
+            "question": "Which tests derive from user requirements in the V‑model?",
+            "options": [
+              "A) Unit tests",
+              "B) Acceptance tests",
+              "C) Integration tests",
+              "D) Static analysis"
+            ],
+            "correct_answer": "B",
+            "explanation": "Acceptance tests trace to user requirements."
+          },
+          {
+            "question": "Why validate early?",
+            "options": [
+              "A) To skip testing later",
+              "B) Early fixes are cheaper and reduce rework",
+              "C) To freeze scope permanently",
+              "D) To shorten documentation"
+            ],
+            "correct_answer": "B",
+            "explanation": "Cost and delay rise sharply when defects are found late."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "quiz_generation_medium",
+      "instruction": "Generate 3 MEDIUM difficulty multiple-choice questions (4 options A-D) about Chapter 17: validating the requirements—reviews, early test design, and V-model alignment. Include answer key and explanations.",
+      "reference_answer": {
+        "questions": [
+          {
+            "question": "Which technique MOST directly reveals ambiguous wording pre‑coding?",
+            "options": [
+              "A) Load testing",
+              "B) Formal inspections with diverse reviewers",
+              "C) Daily standups only",
+              "D) Refactoring"
+            ],
+            "correct_answer": "B",
+            "explanation": "Inspections surface multiple interpretations early."
+          },
+          {
+            "question": "Which artifact best operationalizes validation throughout RE?",
+            "options": [
+              "A) A single sign‑off page",
+              "B) Living acceptance criteria and conceptual tests",
+              "C) Architecture diagram only",
+              "D) Retro notes"
+            ],
+            "correct_answer": "B",
+            "explanation": "Continuous tests/criteria drive clarity and traceability."
+          },
+          {
+            "question": "A requirement passes verification but fails validation. What happened?",
+            "options": [
+              "A) It was not coded",
+              "B) It meets the spec but not stakeholder needs",
+              "C) The test failed",
+              "D) The tool crashed"
+            ],
+            "correct_answer": "B",
+            "explanation": "Verification checks conformance; validation checks fitness for purpose."
+          }
+        ]
+      }
+    },
+    {
+      "task_type": "qa_conceptual",
+      "instruction": "Explain how early validation activities reduce project risk (5–7 sentences).",
+      "reference_answer": "Early validation finds ambiguity and gaps before costly implementation. Deriving tests from requirements forces precision and exposes contradictions. Inspections broaden perspectives and catch issues single authors miss. Linking tests to requirement levels ensures coverage via the V‑model. Fixes are cheaper and faster at this stage, improving schedule predictability. The result is a more reliable foundation for design and development."
+    },
+    {
+      "task_type": "qa_application",
+      "instruction": "Describe a lightweight validation workflow suitable for agile teams (≤5 sentences).",
+      "reference_answer": "Write acceptance criteria with each story; derive conceptual tests collaboratively. Perform brief peer reviews focused on ambiguity and verifiability. Maintain traceability from story to test. Continuously refine criteria during refinement and before sprint start. Run specification‑by‑example workshops to align understanding."
+    }
+  ]
+}
