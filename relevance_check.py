@@ -50,7 +50,7 @@ def calculate_feedback_score(course_material, generated_content):
     """
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are an evaluator who provides feedback on content relevance."},
                 {"role": "user", "content": feedback_prompt}
