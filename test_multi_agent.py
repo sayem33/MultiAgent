@@ -31,6 +31,7 @@ REASONING: [brief explanation]"""
             model="gpt-4o",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=300
+            temperature=0.3
         )
         raw = response["choices"][0]["message"]["content"]
         
@@ -123,4 +124,5 @@ def run_tests():
 
 if __name__ == "__main__":
     run_tests()
+
 
