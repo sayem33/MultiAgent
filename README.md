@@ -1,92 +1,235 @@
 # LLM-Powered Online Teaching Assistant for Requirements Engineering (RE) Course (APUOPE-RE)
 
-## Live Project Link
-[https://comp-se-610-620-autumn-2024-software.onrender.com/](https://comp-se-610-620-autumn-2024-software.onrender.com/)
+A multi-agent AI system designed to assist students in learning Requirements Engineering through intelligent content generation, quizzes, assignments, and conceptual explanations.
 
-## User Acceptance Testing (UAT) Process
+---
 
-### Step-1: Register as a Teacher and Login as a Teacher
+## Multi-Agent Architecture Overview
 
-1. **Register and Login**
-   - Register with any email and set a password.
-   - Choose 'teacher' from the role panel.
-   - Login after completing the registration.
+This system employs a **4-agent collaborative architecture** with a sequential communication protocol, ensuring high-quality educational content through iterative review and refinement.
 
-2. **Dashboard**
-   - Navigate to the Dashboard to see an overview of the course with progress.
-   - Note: This page is structured with dummy data and is not integrated with live data as it was not required by the customer. Further development is planned.
+### Architecture Diagram
 
-3. **Materials**
-   - If any material is listed, delete them for a fresh start.
-   - Add your own materials. Materials can be any PDF file on your PC.
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        CoordinatorAgent                              │
+│                      (Orchestration Layer)                           │
+└─────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Generator  │ ──▶│  Reviewer   │ ──▶│   Refiner   │ ──▶│  Verifier   │
+│    Agent    │    │    Agent    │    │    Agent    │    │    Agent    │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+     │                   │                  │                  │
+     ▼                   ▼                  ▼                  ▼
+  Initial            Quality           Improved             Final
+  Content            Critique          Content            Validation
+```
 
-4. **Studying Lectures**
-   - View uploaded materials in the list panel.
-   - Choose any material from the list and use the following buttons:
-     - "Generate Conceptual Example"
-     - "Generate Summary"
-     - "Find Contents"
-   - These buttons will generate conceptual examples, summaries, and contents based on the selected material.
-   - After generating the response, check the relevance of the content using the "Check Relevance" button (this button appears after generating a response).
-   - Write prompts in the text field below for further analysis on the material.
+---
 
-5. **Quiz**
-   - No information will be displayed initially as no student has taken any quiz yet.
+## Core Multi-Agent System (`multi_agent_engine.py`)
 
-6. **Assignment**
-   - No information will be displayed initially as no student has submitted any assignment yet.
+### Four Specialized Agents
 
-7. **Feedback**
-   - No information will be displayed initially as no student has submitted any feedback yet.
+#### Agent 1: GeneratorAgent - Task-specific Content Creation
 
-### Step-2: Register as a Student and Login as a Student
+Creates initial content tailored to specific educational tasks.
 
-1. **Register and Login**
-   - Register with another email and set a password.
-   - Choose 'student' from the role panel.
-   - Provide any ID as the student ID.
-   - Login after completing the registration.
+```python
+class GeneratorAgent:
+    def __init__(self, task_type):
+        self.prompts = {
+            "summarization": "You are an RE expert. Generate clear, accurate summaries.",
+            "quiz_generation": "You are an RE expert. Generate well-structured quiz questions...",
+            "qa_conceptual": "You are an RE expert. Provide clear, conceptual explanations...",
+            "qa_application": "You are an RE expert. Provide practical, application-focused..."
+        }
+        self.system_prompt = self.prompts.get(task_type, self.prompts["summarization"])
+```
 
-2. **Dashboard**
-   - Navigate to the Dashboard to see an overview of the course with progress.
-   - Note: This page is structured with dummy data and is not integrated with live data as it was not required by the customer. Further development is planned.
+#### Agent 2: ReviewerAgent - Quality Critique
 
-3. **Materials**
-   - View materials uploaded by the teacher.
-   - As a student, you can only view materials uploaded by the teacher. You cannot upload or delete any material.
+Analyzes generated content and provides constructive feedback for improvement.
 
-4. **Studying Lectures**
-   - View uploaded materials in the list panel.
-   - Choose any material from the list and use the following buttons:
-     - "Generate Conceptual Example"
-     - "Generate Summary"
-     - "Find Contents"
-   - These buttons will generate conceptual examples, summaries, and contents based on the selected material.
-   - After generating the response, check the relevance of the content using the "Check Relevance" button (this button appears after generating a response).
-   - Write prompts in the text field below for further analysis on the material.
+```python
+class ReviewerAgent:
+    def review(self, content, original_prompt, pdf_content=None):
+        review_prompt = f"""Task: {original_prompt}
 
-5. **Quiz**
-   - Choose any material from the dropdown list.
-   - Select a difficulty level and press "Generate Quiz" to take the quiz.
-   - After answering the quiz questions, your score will be displayed.
+Generated content:
+{content}
 
-6. **Assignment**
-   - Choose any material from the dropdown list.
-   - Press "Generate Conceptual Assignment" to generate an assignment with instructions.
-   - The generated assignment will also be available as a PDF.
-   - Download the PDF by pressing "Download Generated Assignment (PDF)".
-   - Upload your completed assignment below with your name.
+Provide critique with specific improvements."""
+        # Returns critique for refinement
+```
 
-7. **Feedback**
-   - Submit your feedback anonymously as a student.
+#### Agent 3: RefinerAgent - Content Improvement
 
-### Step-3: Login Again as a Teacher
+Takes the original content and critique to produce an enhanced version.
 
-1. **Quiz**
-   - View the quiz responses submitted when logged in as a student.
+```python
+class RefinerAgent:
+    def refine(self, original_content, critique, original_prompt, pdf_content=None):
+        refine_prompt = f"""Original:
+{original_content}
 
-2. **Assignment**
-   - View the assignments submitted when logged in as a student.
+Critique:
+{critique}
 
-3. **Feedback**
-   - View the feedback submitted when logged in as a student.
+Provide improved version."""
+        # Returns refined content based on critique
+```
+
+#### Agent 4: VerificationAgent - Final Validation
+
+Performs final quality assurance before content delivery.
+
+```python
+class VerificationAgent:
+    def verify(self, content, original_prompt, pdf_content=None):
+        verify_prompt = f"""Content:
+{content}
+
+Verify accuracy and completeness. 
+Return APPROVED or suggest final fixes."""
+        # Returns APPROVED or suggestions
+```
+
+---
+
+## Orchestration - Sequential Collaborative Pipeline
+
+The `CoordinatorAgent` manages the entire workflow, ensuring agents collaborate in sequence:
+
+```python
+class CoordinatorAgent:
+    def orchestrate(self, task_type, prompt, pdf_content=None):
+        generator = GeneratorAgent(task_type)
+        
+        # Step 1: Generate initial content
+        content = generator.generate(prompt, pdf_content)
+        
+        # Step 2: Review content
+        critique = self.reviewer.review(content, prompt, pdf_content)
+        
+        # Step 3: Refine based on critique
+        refined = self.refiner.refine(content, critique, prompt, pdf_content)
+        
+        # Step 4: Verify final output
+        verification = self.verifier.verify(refined, prompt, pdf_content)
+        
+        return refined if "APPROVED" in verification.upper() else f"{refined}\n\n[Note: {verification}]"
+```
+
+---
+
+## Integration Points
+
+The multi-agent system is integrated across multiple components:
+
+### `components/assignment.py`
+
+```python
+# Changed from fine_tuned_engine to multi_agent_engine
+from multi_agent_engine import multi_agent_generate
+
+def generate_conceptual_assignment(pdf_title, pdf_path, pdf_content):
+    prompt = f"Create a real-life scenario-based conceptual assignment..."
+    return multi_agent_generate(prompt, pdf_content, "assignment")
+```
+
+### `quiz_handler.py`
+
+```python
+# Changed from fine_tuned_engine to multi_agent_engine
+from multi_agent_engine import multi_agent_generate
+
+def generate_quiz(pdf_content, difficulty, pdf_path=None):
+    prompt = f"Generate 3 {difficulty.upper()} multiple-choice questions..."
+    raw_data = multi_agent_generate(prompt, pdf_content, "quiz_generation")
+```
+
+### `components/conceptual_examples.py`
+
+```python
+# Changed from fine_tuned_engine to multi_agent_engine
+from multi_agent_engine import multi_agent_generate
+
+def generate_content(prompt, pdf_path, pdf_content):
+    task_type = "assignment" if "example" in prompt.lower() else "summarization"
+    return multi_agent_generate(prompt, pdf_content, task_type)
+```
+
+---
+
+## Key Architecture Features
+
+| Feature | Description |
+|---------|-------------|
+| **4 Specialized Agents** | Each agent has a distinct role (Generate, Review, Refine, Verify) |
+| **Sequential Communication** | Generator → Reviewer → Refiner → Verifier pipeline |
+| **Agent-to-Agent Collaboration** | Critique and refinement loops ensure quality |
+| **Centralized Model** | GPT-4o used for consistency across all agents |
+| **Task-Specific Prompts** | 5 different task types with tailored system prompts |
+
+---
+
+## Task Types Supported
+
+1. **Summarization** - Lecture content summaries
+2. **Quiz Generation** - Multiple-choice question creation
+3. **QA Conceptual** - Conceptual explanations and definitions
+4. **QA Application** - Practical, application-focused answers
+5. **Assignment** - Scenario-based assignment generation
+
+---
+
+## Project Structure
+
+```
+MultiAgent/
+├── app.py                    # Main Streamlit application
+├── multi_agent_engine.py     # Core multi-agent system
+├── quiz_handler.py           # Quiz generation and handling
+├── chatbot.py                # Chatbot interface
+├── auth.py                   # Authentication module
+├── db.py                     # Database operations
+├── components/
+│   ├── assignment.py         # Assignment generation
+│   ├── conceptual_examples.py # Conceptual examples
+│   ├── dashboard.py          # User dashboard
+│   ├── feedback.py           # Feedback collection
+│   ├── lecture_summaries.py  # Lecture summary generation
+│   ├── progress_tracking.py  # Student progress tracking
+│   └── quizzes.py            # Quiz interface
+├── tests/                    # Test suite
+└── requirements.txt          # Dependencies
+```
+
+---
+
+## Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Set up environment variables** (OpenAI API key, etc.)
+
+3. **Run the application:**
+   ```bash
+   streamlit run app.py
+   ```
+   Or use the provided script:
+   ```bash
+   ./run.sh
+   ```
+
+---
+
+## License
+
+This project is developed as part of a Master's thesis at Tampere University.
