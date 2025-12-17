@@ -1,193 +1,70 @@
-# LLM-Powered Online Teaching Assistant for Requirements Engineering (RE) Course (APUOPE-RE)
+# APUOPE-RE: Multi-Agent Teaching Assistant
 
-A multi-agent AI system designed to assist students in learning Requirements Engineering through intelligent content generation, quizzes, assignments, and conceptual explanations.
+This application serves as an interactive teaching assistant for Requirements Engineering (RE) courses. It employs a multi-agent AI architecture to generate high-quality educational content, including quizzes, assignments, and conceptual explanations.
 
----
+## Architecture Overview
 
-## Multi-Agent Architecture Overview
+The system utilizes a sequential collaborative workflow involving four specialized agents. Unlike traditional single-pass LLM interactions, this architecture enforces an iterative review process where content is generated, critiqued, and refined before being presented to the student.
 
-This system employs a **4-agent collaborative architecture** with a sequential communication protocol, ensuring high-quality educational content through iterative review and refinement.
+The workflow is managed by a central orchestration layer (`CoordinatorAgent`) that directs the data flow through the following pipeline:
 
-## Core Multi-Agent System (`multi_agent_engine.py`)
+1.  **Generator:** Creates initial content based on the specific educational task.
+2.  **Reviewer:** Analyzes the output for accuracy and clarity, providing structured critique.
+3.  **Refiner:** Synthesizes the original content and the critique to produce an improved version.
+4.  **Verifier:** Performs a final quality assurance check to ensure the content meets educational standards.
 
-### Four Specialized Agents
+## Core Implementation
 
-#### Agent 1: GeneratorAgent - Task-specific Content Creation
+The backend logic is contained within `multi_agent_engine.py`. This module defines the individual agent classes and the orchestration logic used to manage them.
 
-Creates initial content tailored to specific educational tasks.
+### Agent Configuration
+Each agent is initialized with specific system prompts to define their distinct roles:
+*   **GeneratorAgent:** Uses task-specific prompts (e.g., summarization, quiz generation, conceptual QA) to frame the initial response.
+*   **ReviewerAgent:** Uses a critique-focused prompt to identify flaws in the generated text.
+*   **RefinerAgent:** Uses a synthesis prompt to apply the feedback.
+*   **VerificationAgent:** Uses a validation prompt to approve the final output or append necessary corrections.
 
-```python
-class GeneratorAgent:
-    def __init__(self, task_type):
-        self.prompts = {
-            "summarization": "You are an RE expert. Generate clear, accurate summaries.",
-            "quiz_generation": "You are an RE expert. Generate well-structured quiz questions...",
-            "qa_conceptual": "You are an RE expert. Provide clear, conceptual explanations...",
-            "qa_application": "You are an RE expert. Provide practical, application-focused..."
-        }
-        self.system_prompt = self.prompts.get(task_type, self.prompts["summarization"])
-```
+### Orchestration
+The `CoordinatorAgent` class manages the sequential execution. It passes the output of the Generator to the Reviewer, then to the Refiner, and finally to the Verifier. The final output is only returned to the UI once it has passed through this verification chain.
 
-#### Agent 2: ReviewerAgent - Quality Critique
+## Integration
 
-Analyzes generated content and provides constructive feedback for improvement.
+The multi-agent engine is integrated into the application via specific component modules. It replaces standard API calls to ensure all content benefits from the multi-agent review process.
 
-```python
-class ReviewerAgent:
-    def review(self, content, original_prompt, pdf_content=None):
-        review_prompt = f"""Task: {original_prompt}
+*   **Assignments (`components/assignment.py`):** Uses the engine to generate real-life scenario-based assignments.
+*   **Quizzes (`quiz_handler.py`):** Generates difficulty-graded multiple-choice questions.
+*   **Examples (`components/conceptual_examples.py`):** Dynamically switches between summarization and application tasks based on user input.
 
-Generated content:
-{content}
+## System Capabilities
 
-Provide critique with specific improvements."""
-        # Returns critique for refinement
-```
-
-#### Agent 3: RefinerAgent - Content Improvement
-
-Takes the original content and critique to produce an enhanced version.
-
-```python
-class RefinerAgent:
-    def refine(self, original_content, critique, original_prompt, pdf_content=None):
-        refine_prompt = f"""Original:
-{original_content}
-
-Critique:
-{critique}
-
-Provide improved version."""
-        # Returns refined content based on critique
-```
-
-#### Agent 4: VerificationAgent - Final Validation
-
-Performs final quality assurance before content delivery.
-
-```python
-class VerificationAgent:
-    def verify(self, content, original_prompt, pdf_content=None):
-        verify_prompt = f"""Content:
-{content}
-
-Verify accuracy and completeness. 
-Return APPROVED or suggest final fixes."""
-        # Returns APPROVED or suggestions
-```
-
----
-
-## Orchestration - Sequential Collaborative Pipeline
-
-The `CoordinatorAgent` manages the entire workflow, ensuring agents collaborate in sequence:
-
-```python
-class CoordinatorAgent:
-    def orchestrate(self, task_type, prompt, pdf_content=None):
-        generator = GeneratorAgent(task_type)
-        
-        # Step 1: Generate initial content
-        content = generator.generate(prompt, pdf_content)
-        
-        # Step 2: Review content
-        critique = self.reviewer.review(content, prompt, pdf_content)
-        
-        # Step 3: Refine based on critique
-        refined = self.refiner.refine(content, critique, prompt, pdf_content)
-        
-        # Step 4: Verify final output
-        verification = self.verifier.verify(refined, prompt, pdf_content)
-        
-        return refined if "APPROVED" in verification.upper() else f"{refined}\n\n[Note: {verification}]"
-```
-
----
-
-## Integration Points
-
-The multi-agent system is integrated across multiple components:
-
-### `components/assignment.py`
-
-```python
-# Changed from fine_tuned_engine to multi_agent_engine
-from multi_agent_engine import multi_agent_generate
-
-def generate_conceptual_assignment(pdf_title, pdf_path, pdf_content):
-    prompt = f"Create a real-life scenario-based conceptual assignment..."
-    return multi_agent_generate(prompt, pdf_content, "assignment")
-```
-
-### `quiz_handler.py`
-
-```python
-# Changed from fine_tuned_engine to multi_agent_engine
-from multi_agent_engine import multi_agent_generate
-
-def generate_quiz(pdf_content, difficulty, pdf_path=None):
-    prompt = f"Generate 3 {difficulty.upper()} multiple-choice questions..."
-    raw_data = multi_agent_generate(prompt, pdf_content, "quiz_generation")
-```
-
-### `components/conceptual_examples.py`
-
-```python
-# Changed from fine_tuned_engine to multi_agent_engine
-from multi_agent_engine import multi_agent_generate
-
-def generate_content(prompt, pdf_path, pdf_content):
-    task_type = "assignment" if "example" in prompt.lower() else "summarization"
-    return multi_agent_generate(prompt, pdf_content, task_type)
-```
-
----
-
-## Key Architecture Features
-
-| Feature | Description |
-|---------|-------------|
-| **4 Specialized Agents** | Each agent has a distinct role (Generate, Review, Refine, Verify) |
-| **Sequential Communication** | Generator → Reviewer → Refiner → Verifier pipeline |
-| **Agent-to-Agent Collaboration** | Critique and refinement loops ensure quality |
-| **Centralized Model** | GPT-4o used for consistency across all agents |
-| **Task-Specific Prompts** | 5 different task types with tailored system prompts |
-
----
-
-## Task Types Supported
-
-1. **Summarization** - Lecture content summaries
-2. **Quiz Generation** - Multiple-choice question creation
-3. **QA Conceptual** - Conceptual explanations and definitions
-4. **QA Application** - Practical, application-focused answers
-5. **Assignment** - Scenario-based assignment generation
-
----
+The architecture supports five primary task types, all using GPT-4o for consistency:
+*   **Summarization:** condensing lecture notes.
+*   **Quiz Generation:** creating structured assessment items.
+*   **QA Conceptual:** defining terms and concepts.
+*   **QA Application:** providing practical examples.
+*   **Assignments:** generating complex scenarios.
 
 ## Project Structure
 
-```
+```text
 MultiAgent/
 ├── app.py                    # Main Streamlit application
-├── multi_agent_engine.py     # Core multi-agent system
-├── quiz_handler.py           # Quiz generation and handling
+├── multi_agent_engine.py     # Core multi-agent implementation
+├── quiz_handler.py           # Quiz logic and parsing
 ├── chatbot.py                # Chatbot interface
-├── auth.py                   # Authentication module
-├── db.py                     # Database operations
-├── components/
-│   ├── assignment.py         # Assignment generation
-│   ├── conceptual_examples.py # Conceptual examples
-│   ├── dashboard.py          # User dashboard
-│   ├── feedback.py           # Feedback collection
-│   ├── lecture_summaries.py  # Lecture summary generation
-│   ├── progress_tracking.py  # Student progress tracking
-│   └── quizzes.py            # Quiz interface
+├── auth.py                   # User authentication
+├── db.py                     # Database interactions
+├── components/               # UI Modules
+│   ├── assignment.py
+│   ├── conceptual_examples.py
+│   ├── dashboard.py
+│   ├── feedback.py
+│   ├── lecture_summaries.py
+│   ├── progress_tracking.py
+│   └── quizzes.py
 ├── tests/                    # Test suite
-└── requirements.txt          # Dependencies
+└── requirements.txt          # Python dependencies
 ```
-
----
 
 ## Getting Started
 
