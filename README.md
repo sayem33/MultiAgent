@@ -8,27 +8,6 @@ A multi-agent AI system designed to assist students in learning Requirements Eng
 
 This system employs a **4-agent collaborative architecture** with a sequential communication protocol, ensuring high-quality educational content through iterative review and refinement.
 
-### Architecture Diagram
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        CoordinatorAgent                              │
-│                      (Orchestration Layer)                           │
-└─────────────────────────────────────────────────────────────────────┘
-                                  │
-                                  ▼
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  Generator  │ ──▶│  Reviewer   │ ──▶│   Refiner   │ ──▶│  Verifier   │
-│    Agent    │    │    Agent    │    │    Agent    │    │    Agent    │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
-     │                   │                  │                  │
-     ▼                   ▼                  ▼                  ▼
-  Initial            Quality           Improved             Final
-  Content            Critique          Content            Validation
-```
-
----
-
 ## Core Multi-Agent System (`multi_agent_engine.py`)
 
 ### Four Specialized Agents
@@ -229,7 +208,3 @@ MultiAgent/
    ```
 
 ---
-
-## License
-
-This project is developed as part of a Master's thesis at Tampere University.
